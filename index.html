@@ -20,8 +20,7 @@
   --site-decoration-opacity: 1;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 100px; }
-section[id] { scroll-margin-top: 100px; }
+html { scroll-behavior: smooth; }
 body { margin: 0; font-family: var(--site-font-body); color: var(--site-on-background); background: var(--site-background); line-height: 1.6; }
 #app { min-height: 100vh; background-color: var(--site-background); color: var(--site-on-background); border-radius: 0; }
 a { color: inherit; text-decoration: none; }
@@ -83,10 +82,7 @@ textarea { min-height:110px; resize:vertical; }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
 footer { background:#102D42; color:#E5EEF4; padding:25px 0; font-size:13px; }
 footer .container { display:flex; justify-content:space-between; gap:15px; flex-wrap:wrap; }
-@media(max-width:800px) {
- .nav { flex-wrap: wrap; }
- .navlinks { display:flex; flex-wrap:wrap; gap:12px; width:100%; justify-content:center; }
- .navlinks a { padding:8px 6px; }
+@media(max-width:800px) { .nav { flex-wrap:wrap; } .navlinks { display:flex; flex-wrap:wrap; gap:10px; width:100%; justify-content:center; } .navlinks a { padding:8px 6px; }
  .hero-grid,.why-grid,.contact-grid { grid-template-columns:1fr; gap:28px; }
  .services,.projects { grid-template-columns:1fr 1fr; }
  .hero-panel { max-width:560px; }
@@ -101,6 +97,12 @@ footer .container { display:flex; justify-content:space-between; gap:15px; flex-
  .brand { font-size:14px; }
  .logo { width:40px;height:40px; }
 }
+
+.gallery-placeholder { min-height:150px; display:flex; align-items:center; justify-content:center; border-radius:12px; background:linear-gradient(135deg,#E8F1F7,#D5E8F7); color:#164E78; font-weight:700; margin-bottom:14px; text-align:center; padding:20px; }
+.project { border:1px solid #DCE5EB; border-radius:16px; padding:18px; background:#fff; }
+.project h3 { margin:0 0 8px; color:#164E78; }
+.project p { color:#607584; font-size:14px; }
+@media(max-width:800px) { .projects { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -164,7 +166,39 @@ footer .container { display:flex; justify-content:space-between; gap:15px; flex-
       </div>
     </section>
     <section class="cta"><div class="container"><div><h2>Planning a new project?</h2><p>Share your scope and timeline to discuss a suitable solution.</p></div><a class="btn" href="#contact">Request a Quote ↗</a></div></section>
-    <section class="section" id="contact">
+    
+<section class="section" id="service-details">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">OUR CAPABILITIES</span>
+      <h2>Electrical &amp; MEP Services</h2>
+      <p>Electrical and building-services support for residential, commercial and industrial projects in Kolhapur and Pune.</p>
+    </div>
+    <div class="services">
+      <article class="card"><div class="symbol">⚡</div><h3>Electrical Installation</h3><p>Concealed and surface wiring, lighting and power points, fan points, circuit routing and installation coordination.</p></article>
+      <article class="card"><div class="symbol">▦</div><h3>Panels, DB &amp; Protection</h3><p>Distribution board installation, MCB/RCCB protection, circuit identification, panel connections and testing coordination.</p></article>
+      <article class="card"><div class="symbol">⌁</div><h3>Earthing &amp; Cable Work</h3><p>Earthing connections, cable laying and dressing, termination, continuity checks and site coordination.</p></article>
+      <article class="card"><div class="symbol">◈</div><h3>MEP Coordination</h3><p>Coordination of electrical work with plumbing, HVAC and other building services according to drawings and site requirements.</p></article>
+      <article class="card"><div class="symbol">⌂</div><h3>Residential Projects</h3><p>Electrical works for flats, bungalows and housing projects, based on approved drawings and scope.</p></article>
+      <article class="card"><div class="symbol">▤</div><h3>Commercial &amp; Industrial</h3><p>Electrical installation support for offices, shops, commercial spaces and industrial sites.</p></article>
+    </div>
+  </div>
+</section>
+<section class="section" id="project-gallery">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">PROJECT WORK</span>
+      <h2>Project Photos</h2>
+      <p>Add actual SME site photos here to show customers completed work. The panels below are placeholders, not photos of completed projects.</p>
+    </div>
+    <div class="projects">
+      <article class="project"><div class="gallery-placeholder">Electrical Wiring</div><h3>Wiring &amp; Point Installation</h3><p>Residential and commercial wiring work.</p></article>
+      <article class="project"><div class="gallery-placeholder">DB &amp; Panel Work</div><h3>Distribution Board</h3><p>DB installation and circuit organisation.</p></article>
+      <article class="project"><div class="gallery-placeholder">MEP Site Coordination</div><h3>MEP Site Work</h3><p>Electrical coordination with other services.</p></article>
+    </div>
+  </div>
+</section>
+<section class="section" id="contact">
       <div class="container">
         <div class="section-head"><div class="eyebrow" style="color:#164E78">Contact SME</div><h2>Let’s discuss your requirements</h2><p>Use the enquiry form to prepare a message for WhatsApp. Add your confirmed business contact details before publishing.</p></div>
         <div class="contact-grid">
@@ -191,12 +225,12 @@ footer .container { display:flex; justify-content:space-between; gap:15px; flex-
 <script>
 document.querySelectorAll('a[href^="#"]').forEach(function(link) {
   link.addEventListener('click', function(event) {
-    const targetId = link.getAttribute('href').slice(1);
-    const target = document.getElementById(targetId);
+    const id = link.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
     if (target) {
       event.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      history.replaceState(null, '', '#' + targetId);
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+      history.replaceState(null, '', '#' + id);
     }
   });
 });
