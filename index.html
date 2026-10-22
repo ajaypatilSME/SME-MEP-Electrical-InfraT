@@ -98,7 +98,7 @@ footer .container { display:flex; justify-content:space-between; gap:15px; flex-
  .logo { width:40px;height:40px; }
 }
 
-.gallery-placeholder { min-height:150px; display:flex; align-items:center; justify-content:center; border-radius:12px; background:linear-gradient(135deg,#E8F1F7,#D5E8F7); color:#164E78; font-weight:700; margin-bottom:14px; text-align:center; padding:20px; }
+.gallery-placeholder { min-height:150px; display:flex; align-items:center; justify-content:center; border-radius:12px; background:linear-gradient(135deg,#E8F1F7,#D5E8F7); color:#164E78; font-weight:700; margin-bottom:14px; text-align:center; padding:20px; }\n.gallery-photo { display:block; width:100%; height:210px; object-fit:cover; border-radius:12px; margin-bottom:14px; background:#E8F1F7; }\n.project { overflow:hidden; }
 .project { border:1px solid #DCE5EB; border-radius:16px; padding:18px; background:#fff; }
 .project h3 { margin:0 0 8px; color:#164E78; }
 .project p { color:#607584; font-size:14px; }
@@ -189,12 +189,12 @@ footer .container { display:flex; justify-content:space-between; gap:15px; flex-
     <div class="section-head">
       <span class="eyebrow">PROJECT WORK</span>
       <h2>Project Photos</h2>
-      <p>Add actual SME site photos here to show customers completed work. The panels below are placeholders, not photos of completed projects.</p>
+      <p>Reference photos showing typical electrical and MEP work. These are illustrative images, not claims of completed SME projects.</p>
     </div>
     <div class="projects">
-      <article class="project"><div class="gallery-placeholder">Electrical Wiring</div><h3>Wiring &amp; Point Installation</h3><p>Residential and commercial wiring work.</p></article>
-      <article class="project"><div class="gallery-placeholder">DB &amp; Panel Work</div><h3>Distribution Board</h3><p>DB installation and circuit organisation.</p></article>
-      <article class="project"><div class="gallery-placeholder">MEP Site Coordination</div><h3>MEP Site Work</h3><p>Electrical coordination with other services.</p></article>
+      <article class="project"><img class="gallery-photo" src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Electrician carrying out electrical installation" loading="lazy"><small>REFERENCE IMAGE</small><h3>Wiring &amp; Point Installation</h3><p>Example of residential and commercial electrical installation work.</p></article>
+      <article class="project"><img class="gallery-photo" src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Electrical technical installation and panel work reference" loading="lazy"><small>REFERENCE IMAGE</small><h3>DB &amp; Panel Work</h3><p>Example of distribution board, panel and circuit organisation work.</p></article>
+      <article class="project"><img class="gallery-photo" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Construction site work representing MEP coordination" loading="lazy"><small>REFERENCE IMAGE</small><h3>MEP Site Work</h3><p>Example of construction-site coordination and electrical service work.</p></article>
     </div>
   </div>
 </section>
@@ -253,6 +253,15 @@ document.getElementById('enquiry').addEventListener('submit', function(event) {
     return;
   }
   window.location.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent(message);
+});
+document.querySelectorAll('.gallery-photo').forEach(function(img) {
+  img.addEventListener('error', function() {
+    img.style.display = 'none';
+    const fallback = document.createElement('div');
+    fallback.className = 'gallery-placeholder';
+    fallback.textContent = img.alt || 'Electrical & MEP reference image';
+    img.parentNode.insertBefore(fallback, img.nextSibling);
+  }, { once: true });
 });
 </script>
 </body>
