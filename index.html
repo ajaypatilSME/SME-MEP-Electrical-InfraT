@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="google-site-verification" content="Zb9R_yHnfwE79bNFslhDkQgxoyH3Bzl35gqFdcrPaNY" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SME | MEP Solutions</title>
 <style>
@@ -21,7 +20,8 @@
   --site-decoration-opacity: 1;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+section[id] { scroll-margin-top: 100px; }
 body { margin: 0; font-family: var(--site-font-body); color: var(--site-on-background); background: var(--site-background); line-height: 1.6; }
 #app { min-height: 100vh; background-color: var(--site-background); color: var(--site-on-background); border-radius: 0; }
 a { color: inherit; text-decoration: none; }
@@ -84,7 +84,9 @@ textarea { min-height:110px; resize:vertical; }
 footer { background:#102D42; color:#E5EEF4; padding:25px 0; font-size:13px; }
 footer .container { display:flex; justify-content:space-between; gap:15px; flex-wrap:wrap; }
 @media(max-width:800px) {
- .navlinks { display:none; }
+ .nav { flex-wrap: wrap; }
+ .navlinks { display:flex; flex-wrap:wrap; gap:12px; width:100%; justify-content:center; }
+ .navlinks a { padding:8px 6px; }
  .hero-grid,.why-grid,.contact-grid { grid-template-columns:1fr; gap:28px; }
  .services,.projects { grid-template-columns:1fr 1fr; }
  .hero-panel { max-width:560px; }
@@ -187,6 +189,17 @@ footer .container { display:flex; justify-content:space-between; gap:15px; flex-
   <footer><div class="container"><span>© <span id="year">2026</span> SME. All rights reserved.</span><span>Electrical Contracting • MEP Project Solutions</span></div></footer>
 </div>
 <script>
+document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+  link.addEventListener('click', function(event) {
+    const targetId = link.getAttribute('href').slice(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      event.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', '#' + targetId);
+    }
+  });
+});
 document.getElementById('year').textContent = new Date().getFullYear();
 document.getElementById('enquiry').addEventListener('submit', function(event) {
   event.preventDefault();
